@@ -1,0 +1,31 @@
+#!/bin/bash
+
+function make_new_name
+{
+	name="$1"
+	while [ -e "$name" ]
+	do
+		name="$name~"
+	done
+	echo $name
+}
+
+function install
+{
+	source="$1"
+	target="$2"
+	
+	if [ -e "$target" ]
+	then
+		backup="$(make_new_name $target.$(date -I))"
+		mv -f "$target" "$backup"
+	fi
+
+	ln -s "$source" "$target"
+}
+
+thisscript="$(readlink -f ${BASH_SOURCE[0]})"
+thispath="$(readlink -f $(dirname $thisscript)/..)"
+
+install "$thispath"/bashrc "$HOME"/.bashrc
+install "$thispath"/profile "$HOME"/.profile

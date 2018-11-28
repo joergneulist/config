@@ -1,0 +1,20 @@
+function git_plus_status
+{
+	git $*
+	git status
+}
+
+function git_alias
+{
+	name=$1
+	shift
+	alias $name="git_plus_status $*"
+}
+
+alias ?='git status'
+git_alias add add
+git_alias commit commit
+git_alias ci commit
+git_alias pull pull --rebase
+git_alias push push
+git_alias res reset
