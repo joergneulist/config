@@ -6,6 +6,14 @@ thisscript="$(readlink -f ${BASH_SOURCE[0]})"
 thispath="$(dirname $thisscript)"
 for component in $thispath/bash/*
 do
-	echo ...$(basename $component)
-	source $component
+	name=$(basename $component)
+	case "$name" in
+		~*)
+			;;
+		*)
+			echo ...$name
+			source $component
+			;;
+	esac
 done
+
