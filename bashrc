@@ -9,9 +9,10 @@ do
 	name=$(basename $component)
 	case "$name" in
 		~*)
+			echo "(ignoring ${name#'~'})"
 			;;
 		*)
-			echo ...$name
+			echo "...$name"
 			source $component
 			;;
 	esac
